@@ -1,5 +1,6 @@
 package com.rappi.test.redditpostsviewer.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +51,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 bundle.putSerializable("child", redditChild);
                 Intent detailIntent = new Intent(context, DetailActivity.class);
                 detailIntent.putExtras(bundle);
+                detailIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 context.startActivity(detailIntent);
+                ((Activity)context).overridePendingTransition(R.anim.rotate_anim, R.anim.rotate_anim_against);
             }
         });
         holder.thumbnailText.setText(redditChild.getData().getTitle());
